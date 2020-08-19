@@ -1,0 +1,77 @@
+<!-- <div class="row"> -->
+<div class="col-6">
+  <div class="card">
+    <form [formGroup]="companyForm">
+      <div class="card-body">
+        <div class="form-group row">
+          <label for="name" class="col-md-2 col-form-label starMark">Company Name</label>
+          <div class="col-md-6">
+            <input formControlName="companyname" id="name" type="text" class="form-control" placeholder="Enter company name">
+
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-md-2 col-form-label starMark">Code</label>
+          <div class="col-md-6">
+            <input formControlName="code" id="code" type="text" class="form-control" placeholder="Enter company code">
+
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-md-2 col-form-label starMark">country</label>
+          <div class="col-md-6">
+            <input formControlName="country" id="ccountry" type="text" class="form-control"  placeholder="Enter Country">
+
+          </div>
+        </div>
+        <h2>Employee Details</h2>
+        <div formArrayName="employee" *ngFor="let item of companyForm.get('employee').controls; let i = index;">
+          <div [formGroupName]="i">
+            <div class="form-group row">
+              <label for="email" class="col-md-2 col-form-label starMark"> Name</label>
+              <div class="col-md-6">
+                <input formControlName="ename" type="text" class="form-control" placeholder="Enter name">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-md-2 col-form-label starMark"> Code</label>
+              <div class="col-md-6">
+                <input type="text" formControlName="ecode" class="form-control" placeholder="Enter code">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="salary" class="col-md-2 col-form-label starMark"> salary</label>
+              <div class="col-md-6">
+                <input formControlName="esalary" type="number" class="form-control" placeholder="Enter Salary">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-md-2 col-form-label starMark"> Profile Picture</label>
+              <div class="col-md-6">
+                <button mat-stroked-button type="button" (click)=filePicker.click()>Pick Image</button>
+                <input type="file" #filePicker (change)="onImagePicked($event,i)">
+                <!-- <input type="file" formControlName="epic" class="form-control"> -->
+              </div>
+            </div>
+            <div class="image-preview" *ngIf="imagePreview[i] !='' && imagePreview[i] && item.get('epic').valid">
+              <img [src]="imagePreview[i]" [alt]="item.value.ename">
+           </div>
+          </div>
+
+          <!-- Chosen name: {{ companyForm.controls.employee.controls[i].controls.ename.value }} -->
+          <button type="button" class="btn btn-danger pull-right" (click)="removeitem(i)" *ngIf="i != 0">Remove</button>
+        </div>
+        <button type="button" class="btn btn-primary"  (click)="addItem()" style="margin-top: 5px;">Add More
+          Employee</button>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-12">
+          <button type="button" class="btn btn-primary" (click)="additemsubmit()"><i
+              class="fa fa-dot-circle-o"></i>
+            Submit</button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
+<!-- </div> -->
